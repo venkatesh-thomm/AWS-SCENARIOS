@@ -1,6 +1,6 @@
-Yes. Keep the README simple and focused on **what we built, architecture, testing, troubleshooting, and cleanup**.
 
-# VPC Scenario 1 — Public Subnet → EC2 → Internet
+
+#### VPC Scenario 1 — Public Subnet → EC2 → Internet
 
 ## Objective
 
@@ -9,17 +9,30 @@ Create a public subnet and launch an EC2 instance that can communicate with the 
 ## Architecture
 
 ```text
-Internet
-   |
-Internet Gateway
-   |
-Public Route Table
-   |
-Public Subnet
-   |
-EC2 Instance
-   |
-Nginx
+                         Internet
+                            │
+                            │
+                    ┌───────▼────────┐
+                    │ Internet       │
+                    │ Gateway (IGW)   │
+                    └───────┬────────┘
+                            │
+                     0.0.0.0/0
+                            │
+                    ┌───────▼────────┐
+                    │ Public Route   │
+                    │ Table          │
+                    └───────┬────────┘
+                            │
+                    ┌───────▼────────┐
+                    │ Public Subnet  │
+                    │ 10.0.1.0/24    │
+                    └───────┬────────┘
+                            │
+                    ┌───────▼────────┐
+                    │ EC2 Instance   │
+                    │ Public IP      │
+                    └────────────────┘
 ```
 
 ## Components
